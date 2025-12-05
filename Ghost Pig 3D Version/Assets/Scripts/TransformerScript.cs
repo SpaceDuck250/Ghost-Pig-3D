@@ -2,28 +2,69 @@ using UnityEngine;
 
 public class TransformerScript : MonoBehaviour
 {
-    public TransformableData currentTransformableData;
+    public TransformableData transformData;
 
     public GameObject moveComponentObj;
     public MoveComponent moveComponent;
 
     public Transform componentContainer;
 
+    public Rigidbody rb;
+
     private void Start()
     {
-        GameObject newMoveComponent = Instantiate(moveComponentObj, componentContainer);
-        moveComponent = newMoveComponent.GetComponent<MoveComponent>();
+        if (transformData != null)
+        {
+            TransformToSomething(transformData);
+
+        }
+    }
+
+    private void Update()
+    {
+        moveComponent.CheckInputs();
+    }
+
+    private void FixedUpdate()
+    {
+        moveComponent.Move();
     }
 
     private void TransformToSomething(TransformableData transformData)
     {
-        currentTransformableData = transformData;
+        this.transformData = transformData;
+        moveComponentObj = transformData.moveComponentObj;
+
+        SetupMoveComponent();
+
+        SetupPosition();
+        SetupCameraPosition();
+        SetupNewPlayerBody();
 
     }
 
     // Have this in a separate class later or atleast rename;
-    public void SetupMoveComponent()
+    private void SetupMoveComponent()
     {
-        moveComponent.AddRigidbody()
+        GameObject newMoveComponent = Instantiate(moveComponentObj, componentContainer);
+        moveComponent = newMoveComponent.GetComponent<MoveComponent>();
+        moveComponent.AddRigidbody(rb);
+        moveComponent.EditMoveValues(transformData);
+
+    }
+
+    private void SetupPosition()
+    {
+
+    }
+
+    private void SetupCameraPosition()
+    {
+
+    }
+
+    private void SetupNewPlayerBody()
+    {
+
     }
 }

@@ -8,5 +8,5 @@ public class TransformableData : ScriptableObject
     public float moveSpeed;
     public float smoothValue;
 
-    public MoveComponent moveComponent;
+    public GameObject moveComponentObj;
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class TransformerScript : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class TransformerScript : MonoBehaviour
 
     public Rigidbody rb;
 
+    public PlayerMoveScript playerMoveScript;
+
+
     private void Start()
     {
         if (transformData != null)
@@ -18,16 +22,6 @@ public class TransformerScript : MonoBehaviour
             TransformToSomething(transformData);
 
         }
-    }
-
-    private void Update()
-    {
-        moveComponent.CheckInputs();
-    }
-
-    private void FixedUpdate()
-    {
-        moveComponent.Move();
     }
 
     private void TransformToSomething(TransformableData transformData)
@@ -50,6 +44,8 @@ public class TransformerScript : MonoBehaviour
         moveComponent = newMoveComponent.GetComponent<MoveComponent>();
         moveComponent.AddRigidbody(rb);
         moveComponent.EditMoveValues(transformData);
+
+        playerMoveScript.moveComponent = moveComponent;
 
     }
 

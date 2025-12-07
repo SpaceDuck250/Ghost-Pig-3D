@@ -11,6 +11,7 @@ public class TransformerScript : MonoBehaviour
     public Transform componentContainer;
 
     public Rigidbody rb;
+    public Camera cam;
 
     public PlayerMoveScript playerMoveScript;
 
@@ -42,7 +43,7 @@ public class TransformerScript : MonoBehaviour
     {
         GameObject newMoveComponent = Instantiate(moveComponentObj, componentContainer);
         moveComponent = newMoveComponent.GetComponent<MoveComponent>();
-        moveComponent.AddRigidbody(rb);
+        moveComponent.InitializeValues(rb, cam);
         moveComponent.EditMoveValues(transformData);
 
         playerMoveScript.moveComponent = moveComponent;

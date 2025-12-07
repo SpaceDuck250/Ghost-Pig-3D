@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SimpleObjectMove : MoveComponent 
+public class GhostMove : MoveComponent
 {
     private float moveX;
     private float moveZ;
@@ -12,6 +12,8 @@ public class SimpleObjectMove : MoveComponent
 
     private Vector3 forward;
     private Vector3 sideways;
+
+    private float moveY;
 
 
     public override void EditMoveValues(TransformableData moveData)
@@ -25,6 +27,8 @@ public class SimpleObjectMove : MoveComponent
         moveX = Input.GetAxisRaw("Horizontal");
         moveZ = Input.GetAxisRaw("Vertical");
 
+        moveY = Input.GetAxisRaw("UpDown");
+
 
         forward = cam.transform.forward;
         forward.y = 0;
@@ -36,11 +40,11 @@ public class SimpleObjectMove : MoveComponent
 
     public override void Move()
     {
-        //Vector3 targetVelocity = new Vector3(moveX, 0, moveZ) * moveSpeed;
-        Vector3 targetVelocity = forward * moveZ + sideways * moveX;
+        Vector3 targetVelocity = forward * moveZ + sideways * moveX + Vector3.up * moveY;
         targetVelocity *= moveSpeed;
-        targetVelocity.y = rb.linearVelocity.y;
 
         rb.linearVelocity = Vector3.SmoothDamp(rb.linearVelocity, targetVelocity, ref refVelocity, smoothValue * Time.fixedDeltaTime);
     }
+
+   
 }

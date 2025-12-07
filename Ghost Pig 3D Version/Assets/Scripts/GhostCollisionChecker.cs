@@ -9,7 +9,14 @@ public class GhostCollisionChecker : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        TransformableData data = other.gameObject.GetComponent<TransformableObjScript>().transformableData;
+        TransformableObjScript transformableScript = other.gameObject.GetComponent<TransformableObjScript>();
+        if (transformableScript == null)
+        {
+            return;
+        }
+
+        TransformableData data = transformableScript.transformableData;
+
         if (data != null) // change later
         {
             OnTransformInto?.Invoke(data);

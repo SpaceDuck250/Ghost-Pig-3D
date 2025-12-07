@@ -8,12 +8,42 @@ public class HighlighterScript : MonoBehaviour
 
     public static Material greenTint;
 
+    public GhostCollisionChecker collisionChecker;
+
+    private GameObject greenTintObj;
+
+
     void Start()
     {
+        collisionChecker = GhostCollisionChecker.instance;
+        collisionChecker.OnObjectEnter += OnObjectEnter;
+
         objectShape = gameObject;
         greenTint = Resources.Load<Material>("Materials/GreenTint");
 
         CreateGreenClone();
+
+
+    }
+
+    private void OnDestroy()
+    {
+        print(collisionChecker);
+        collisionChecker.OnObjectEnter -= OnObjectEnter;
+
+    }
+
+    private void OnObjectEnter(GameObject obj)
+    {
+        if (obj == gameObject)
+        {
+            ShowGreenTint(true);
+        }
+        else
+        {
+            ShowGreenTint(false);
+        }
+
     }
 
     private void CreateGreenClone()
@@ -25,9 +55,17 @@ public class HighlighterScript : MonoBehaviour
         MeshRenderer meshRenderer = greenClone.GetComponent<MeshRenderer>();
         meshRenderer.material = greenTint;
 
+        TransformableObjScript transformableScript = greenClone.GetComponent<TransformableObjScript>();
+        Destroy(transformableScript);
+
+        greenTintObj = greenClone;
+
         greenClone.SetActive(false);
+    }
 
-
+    private void ShowGreenTint(bool shown)
+    {
+        greenTintObj.SetActive(shown);
     }
 
 

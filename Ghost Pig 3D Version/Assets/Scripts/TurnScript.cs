@@ -16,7 +16,7 @@ public class TurnScript : MonoBehaviour
 
     private void Start()
     {
-        Cursor.visible = false;
+        //Cursor.visible = false;
     }
 
     private void Update()

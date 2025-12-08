@@ -4,19 +4,16 @@ using System.Collections.Generic;
 
 public class GhostCollisionChecker : MonoBehaviour
 {
-    public event Action<TransformableData> OnTransformInto;
-    public event Action<GameObject> OnObjectEnter;
+    public event Action<TransformableData, GameObject> OnTransformInto;
+    public static event Action<GameObject> OnObjectEnter;
 
-    public GameObject selectedObject;
+    [SerializeField]
+    private GameObject selectedObject;
 
-    public List<GameObject> enteredObjectList = new List<GameObject>();
+    [SerializeField]
+    private List<GameObject> enteredObjectList = new List<GameObject>();
 
-    public static GhostCollisionChecker instance;
-
-    private void Awake()
-    {
-        instance = this;
-    }
+    private bool ghostCollisionDisabled = false;
 
     private void Start()
     {
@@ -26,15 +23,30 @@ public class GhostCollisionChecker : MonoBehaviour
     private void Update()
     {
         TrySelectingNewObject();
+
+        if (Input.GetKeyDown(KeyCode.Q) && selectedObject != null)
+        {
+            TransformInto(selectedObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        if (ghostCollisionDisabled)
+        {
+            return;
+        }
+
         TryAddObjectToList(other.gameObject);
     }
 
     private void OnTriggerExit(Collider other)
     {
+        if (ghostCollisionDisabled)
+        {
+            return;
+        }
+
         RemoveObjectFromList(other.gameObject);
     }
 
@@ -50,7 +62,11 @@ public class GhostCollisionChecker : MonoBehaviour
 
         if (data != null) // change later
         {
-            OnTransformInto?.Invoke(data);
+            OnTransformInto?.Invoke(data, selectedObject);
+            enteredObjectList.Remove(obj);
+
+            ghostCollisionDisabled = true;
+            selectedObject = null;
         }
     }
 
@@ -109,8 +125,8 @@ public class GhostCollisionChecker : MonoBehaviour
 
         selectedObject = FindClosestObject(enteredObjectList);
         OnObjectEnter?.Invoke(selectedObject);
-        print("a");
-    
     }
+
+
 
 }

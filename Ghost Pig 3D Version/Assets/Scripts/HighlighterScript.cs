@@ -15,8 +15,7 @@ public class HighlighterScript : MonoBehaviour
 
     void Start()
     {
-        collisionChecker = GhostCollisionChecker.instance;
-        collisionChecker.OnObjectEnter += OnObjectEnter;
+        GhostCollisionChecker.OnObjectEnter += OnObjectEnter;
 
         objectShape = gameObject;
         greenTint = Resources.Load<Material>("Materials/GreenTint");
@@ -28,8 +27,7 @@ public class HighlighterScript : MonoBehaviour
 
     private void OnDestroy()
     {
-        print(collisionChecker);
-        collisionChecker.OnObjectEnter -= OnObjectEnter;
+        GhostCollisionChecker.OnObjectEnter -= OnObjectEnter;
 
     }
 

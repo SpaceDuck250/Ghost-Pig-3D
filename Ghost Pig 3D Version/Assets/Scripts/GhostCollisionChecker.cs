@@ -18,6 +18,14 @@ public class GhostCollisionChecker : MonoBehaviour
     private void Start()
     {
         enteredObjectList.Clear();
+
+        TransformerScript.OnTransformBackIntoGhostPig += OnTransformBackIntoGhostPig;
+    }
+
+    private void OnDestroy()
+    {
+        TransformerScript.OnTransformBackIntoGhostPig -= OnTransformBackIntoGhostPig;
+
     }
 
     private void Update()
@@ -48,6 +56,11 @@ public class GhostCollisionChecker : MonoBehaviour
         }
 
         RemoveObjectFromList(other.gameObject);
+    }
+
+    private void OnTransformBackIntoGhostPig()
+    {
+        ghostCollisionDisabled = false;
     }
 
     private void TransformInto(GameObject obj)

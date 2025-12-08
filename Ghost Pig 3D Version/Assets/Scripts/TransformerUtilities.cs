@@ -3,7 +3,7 @@ using System;
 
 public class TransformerUtilities : MonoBehaviour
 {
-    public TransformableData transformData;
+    public TransformableData currentTransformData;
 
     public Transform componentContainer;
 
@@ -15,15 +15,17 @@ public class TransformerUtilities : MonoBehaviour
 
     public Transform playerBody;
 
-    public void TransformToSomething(TransformableData transformData, GameObject obj)
+    public void TransformToSomething(TransformableData transformData, GameObject obj, Vector3 newPlayerPosition)
     {
-        this.transformData = transformData;
+        ClearOldBody();
+
+        this.currentTransformData = transformData;
         GameObject moveComponentObj = transformData.moveComponentObj;
 
         SetupMoveComponent(moveComponentObj);
 
 
-        SetupPosition(obj);
+        SetupPosition(newPlayerPosition);
         SetupNewPlayerBody(obj);
 
     }
@@ -37,15 +39,15 @@ public class TransformerUtilities : MonoBehaviour
 
         moveComponent = newMoveComponent.GetComponent<MoveComponent>();
         moveComponent.InitializeValues(rb, cam);
-        moveComponent.EditMoveValues(transformData);
+        moveComponent.EditMoveValues(currentTransformData);
 
         playerMoveScript.moveComponent = moveComponent;
 
     }
 
-    private void SetupPosition(GameObject obj)
+    private void SetupPosition(Vector3 newPos)
     {
-        transform.position = obj.transform.position;
+        transform.position = newPos;
     }
 
 
@@ -55,9 +57,19 @@ public class TransformerUtilities : MonoBehaviour
 
     }
 
+    private void SetupColliderScale(GameObject obj)
+    {
+
+    }
+
     public void DestroyOldObject(GameObject obj)
     {
         Destroy(obj);
+    }
+
+    public void CreateOldObject(GameObject obj)
+    {
+        GameObject oldObject = Instantiate(obj, transform.position, Quaternion.identity);
     }
 
     public void ClearOldBody()

@@ -9,6 +9,8 @@ public class TransformerScript : MonoBehaviour
 
     public static System.Action OnTransformBackIntoGhostPig;
 
+    private bool alreadyGhostPig;
+
     private void Start()
     {
         TransformBackIntoGhostPig();
@@ -25,7 +27,7 @@ public class TransformerScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
-            TransformBackIntoGhostPig(); 
+            TransformBackIntoGhostPig();
         }
     }
 
@@ -35,20 +37,30 @@ public class TransformerScript : MonoBehaviour
 
         transformer.TransformToSomething(data, obj, blockPosition);
         transformer.DestroyOldObject(obj);
+
+        alreadyGhostPig = false;
     }
 
     public void TransformBackIntoGhostPig()
     {
+        if (alreadyGhostPig)
+        {
+            return;
+        }
+
         TransformableData currentTransformableData = transformer.currentTransformData;
 
         if (currentTransformableData != null)
         {
             GameObject currentObj = currentTransformableData.transformObject;
-            transformer.CreateOldObject(currentObj);
+            Quaternion objectRotation = transformer.playerBody == null ? Quaternion.identity : transformer.playerBody.transform.rotation;
+
+            transformer.CreateOldObject(currentObj, objectRotation);
 
         }
 
         transformer.TransformToSomething(ghostPigData, ghostPigData.transformObject, transform.position);
+        alreadyGhostPig = true;
 
         OnTransformBackIntoGhostPig?.Invoke();
     }

@@ -911,6 +911,7 @@ GameObject:
   - component: {fileID: 1069704045}
   - component: {fileID: 1069704046}
   - component: {fileID: 1069704047}
+  - component: {fileID: 1069704048}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -998,7 +999,8 @@ MonoBehaviour:
   cam: {fileID: 330585545}
   playerMoveScript: {fileID: 1069704043}
   collisionChecker: {fileID: 1069704044}
-  playerBody: {fileID: 1897760998}
+  playerBodyContainer: {fileID: 1897760998}
+  playerBody: {fileID: 0}
 --- !u!54 &1069704042
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1051,8 +1053,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e531027ed3d84d4fb9a9717b1406b41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionListScript: {fileID: 1069704048}
   selectedObject: {fileID: 0}
-  enteredObjectList: []
 --- !u!114 &1069704045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1104,6 +1106,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transformer: {fileID: 1069704041}
   ghostPigData: {fileID: 11400000, guid: d1c5495a56508ff47a8a8fac1eb2e613, type: 2}
+--- !u!114 &1069704048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069704036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a4367e1ab4be454ebf86f2540868cb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enteredObjectList: []
+  collisionChecker: {fileID: 1069704044}
 --- !u!1001 &1129884016
 PrefabInstance:
   m_ObjectHideFlags: 0

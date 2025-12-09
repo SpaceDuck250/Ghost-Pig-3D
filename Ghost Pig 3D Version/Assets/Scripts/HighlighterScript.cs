@@ -46,7 +46,7 @@ public class HighlighterScript : MonoBehaviour
 
     private void CreateGreenClone()
     {
-        GameObject greenClone = Instantiate(objectShape, transform.position, Quaternion.identity, transform);
+        GameObject greenClone = Instantiate(objectShape, transform.position, transform.localRotation, transform);
 
         greenClone.transform.localScale *= scaleModifier;
 

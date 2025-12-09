@@ -5,19 +5,18 @@ using System.Collections.Generic;
 public class GhostCollisionChecker : MonoBehaviour
 {
     public event Action<TransformableData, GameObject> OnTransformInto;
-    public static event Action<GameObject> OnObjectEnter;
+    public static Action<GameObject> OnObjectEnter;
+
+    public GhostCollisionListScript collisionListScript;
 
     [SerializeField]
     private GameObject selectedObject;
-
-    [SerializeField]
-    private List<GameObject> enteredObjectList = new List<GameObject>();
 
     private bool ghostCollisionDisabled = false;
 
     private void Start()
     {
-        enteredObjectList.Clear();
+        collisionListScript.enteredObjectList.Clear();
 
         TransformerScript.OnTransformBackIntoGhostPig += OnTransformBackIntoGhostPig;
     }
@@ -45,7 +44,7 @@ public class GhostCollisionChecker : MonoBehaviour
             return;
         }
 
-        TryAddObjectToList(other.gameObject);
+        collisionListScript.TryAddObjectToList(other.gameObject);
     }
 
     private void OnTriggerExit(Collider other)
@@ -55,12 +54,14 @@ public class GhostCollisionChecker : MonoBehaviour
             return;
         }
 
-        RemoveObjectFromList(other.gameObject);
+        collisionListScript.RemoveObjectFromList(other.gameObject);
+        selectedObject = null;
     }
 
     private void OnTransformBackIntoGhostPig()
     {
         ghostCollisionDisabled = false;
+        selectedObject = null;
     }
 
     private void TransformInto(GameObject obj)
@@ -75,10 +76,12 @@ public class GhostCollisionChecker : MonoBehaviour
 
         if (data != null) // change later
         {
-            OnTransformInto?.Invoke(data, selectedObject);
-            enteredObjectList.Remove(obj);
-
             ghostCollisionDisabled = true;
+
+            OnTransformInto?.Invoke(data, selectedObject);
+
+            collisionListScript.ClearObjectsFromList();
+
             selectedObject = null;
         }
     }
@@ -105,41 +108,14 @@ public class GhostCollisionChecker : MonoBehaviour
         return closestObject;
     }
 
-    private void TryAddObjectToList(GameObject obj)
-    {
-        TransformableObjScript transformableScript = obj.GetComponent<TransformableObjScript>();
-        if (transformableScript == null)
-        {
-            return;
-        }
-
-        if (!enteredObjectList.Contains(obj))
-        {
-            enteredObjectList.Add(obj);
-        }
-    }
-
-    private void RemoveObjectFromList(GameObject obj)
-    {
-        enteredObjectList.Remove(obj);
-        if (enteredObjectList.Count == 0)
-        {
-            OnObjectEnter?.Invoke(null);
-        }
-
-    }
-
     private void TrySelectingNewObject()
     {
-        if (enteredObjectList.Count == 0)
+        if (collisionListScript.enteredObjectList.Count == 0 || ghostCollisionDisabled)
         {
             return;
         }
 
-        selectedObject = FindClosestObject(enteredObjectList);
+        selectedObject = FindClosestObject(collisionListScript.enteredObjectList);
         OnObjectEnter?.Invoke(selectedObject);
     }
-
-
-
 }

@@ -13,7 +13,8 @@ public class TransformerUtilities : MonoBehaviour
     public PlayerMoveScript playerMoveScript;
     public GhostCollisionChecker collisionChecker;
 
-    public Transform playerBody;
+    public Transform playerBodyContainer;
+    public GameObject playerBody;
 
     public void TransformToSomething(TransformableData transformData, GameObject obj, Vector3 newPlayerPosition)
     {
@@ -53,13 +54,8 @@ public class TransformerUtilities : MonoBehaviour
 
     private void SetupNewPlayerBody(GameObject obj)
     {
-        GameObject newPlayerBody = Instantiate(obj, transform.position, Quaternion.identity, playerBody);
-
-    }
-
-    private void SetupColliderScale(GameObject obj)
-    {
-
+        GameObject newPlayerBody = Instantiate(obj, transform.position, Quaternion.identity, playerBodyContainer);
+        playerBody = newPlayerBody;
     }
 
     public void DestroyOldObject(GameObject obj)
@@ -67,14 +63,14 @@ public class TransformerUtilities : MonoBehaviour
         Destroy(obj);
     }
 
-    public void CreateOldObject(GameObject obj)
+    public void CreateOldObject(GameObject obj, Quaternion rotation)
     {
-        GameObject oldObject = Instantiate(obj, transform.position, Quaternion.identity);
+        GameObject oldObject = Instantiate(obj, transform.position, rotation);
     }
 
     public void ClearOldBody()
     {
-        foreach (Transform child in playerBody)
+        foreach (Transform child in playerBodyContainer)
         {
             Destroy(child.gameObject);
         }

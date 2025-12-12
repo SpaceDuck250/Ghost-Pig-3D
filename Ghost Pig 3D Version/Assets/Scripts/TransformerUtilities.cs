@@ -16,6 +16,8 @@ public class TransformerUtilities : MonoBehaviour
     public Transform playerBodyContainer;
     public GameObject playerBody;
 
+    public Transform groundCheckTransform;
+
     public void TransformToSomething(TransformableData transformData, GameObject obj, Vector3 newPlayerPosition)
     {
         ClearOldBody();
@@ -28,6 +30,8 @@ public class TransformerUtilities : MonoBehaviour
 
         SetupPosition(newPlayerPosition);
         SetupNewPlayerBody(obj);
+        SetupGravity(transformData.useGravity);
+        SetupGroundCheckOffset(transformData.groundCheckPositionOffset);
 
     }
 
@@ -39,7 +43,7 @@ public class TransformerUtilities : MonoBehaviour
         MoveComponent moveComponent = newMoveComponent.GetComponent<MoveComponent>();
 
         moveComponent = newMoveComponent.GetComponent<MoveComponent>();
-        moveComponent.InitializeValues(rb, cam);
+        moveComponent.InitializeValues(rb, cam, groundCheckTransform);
         moveComponent.EditMoveValues(currentTransformData);
 
         playerMoveScript.moveComponent = moveComponent;
@@ -56,6 +60,16 @@ public class TransformerUtilities : MonoBehaviour
     {
         GameObject newPlayerBody = Instantiate(obj, transform.position, Quaternion.identity, playerBodyContainer);
         playerBody = newPlayerBody;
+    }
+
+    private void SetupGravity(bool useGravity)
+    {
+        rb.useGravity = useGravity;
+    }
+
+    private void SetupGroundCheckOffset(Vector3 offset)
+    {
+        groundCheckTransform.localPosition = offset;
     }
 
     public void DestroyOldObject(GameObject obj)

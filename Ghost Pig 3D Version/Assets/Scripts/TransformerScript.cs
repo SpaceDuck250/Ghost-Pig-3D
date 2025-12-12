@@ -60,6 +60,7 @@ public class TransformerScript : MonoBehaviour
         }
 
         transformer.TransformToSomething(ghostPigData, ghostPigData.transformObject, transform.position);
+
         alreadyGhostPig = true;
 
         OnTransformBackIntoGhostPig?.Invoke();

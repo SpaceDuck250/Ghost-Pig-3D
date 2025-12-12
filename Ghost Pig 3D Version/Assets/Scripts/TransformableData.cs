@@ -7,6 +7,10 @@ public class TransformableData : ScriptableObject
 
     public float moveSpeed;
     public float smoothValue;
+    public float jumpForce;
 
     public GameObject moveComponentObj;
+    public bool useGravity = true;
+
+    public Vector3 groundCheckPositionOffset;
 }

@@ -15,4 +15,6 @@ MonoBehaviour:
   transformObject: {fileID: 5956275691388879294, guid: a9644e1910e94264c9fdf5f058ca0736, type: 3}
   moveSpeed: 10
   smoothValue: 5
+  jumpForce: 0
   moveComponentObj: {fileID: 8732499116083180173, guid: 6646138d817765448b598c9824397ee1, type: 3}
+  useGravity: 0

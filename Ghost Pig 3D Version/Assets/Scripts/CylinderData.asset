@@ -15,4 +15,7 @@ MonoBehaviour:
   transformObject: {fileID: 3721495728563691236, guid: a2e304d9f953e4640bc728dd9d7b9295, type: 3}
   moveSpeed: 10
   smoothValue: 5
-  moveComponentObj: {fileID: 8732499116083180173, guid: 6646138d817765448b598c9824397ee1, type: 3}
+  jumpForce: 5
+  moveComponentObj: {fileID: 4321470994432122185, guid: 66b5c4a8f0f267145b6ee932e14e5fd8, type: 3}
+  useGravity: 1
+  groundCheckPositionOffset: {x: 0, y: -0.901, z: 0}

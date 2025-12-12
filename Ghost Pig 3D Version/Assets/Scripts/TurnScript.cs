@@ -13,10 +13,12 @@ public class TurnScript : MonoBehaviour
     public float sensitivity;
 
     public Transform rotatePoint;
+    public CameraSwitcherScript camSwitcher;
 
     private void Start()
     {
         //Cursor.visible = false;
+        rotatePoint = camSwitcher.thirdPersonRotatePoint;
     }
 
     private void Update()
@@ -41,8 +43,4 @@ public class TurnScript : MonoBehaviour
         transform.Rotate(rotateVectorX);
     }
 
-    private void SetRotation()
-    {
-
-    }
 }

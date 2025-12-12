@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SimpleObjectMove : MoveComponent 
+public class SimpleObjectMove : MoveComponent
 {
     private float moveX;
     private float moveZ;
@@ -13,11 +13,16 @@ public class SimpleObjectMove : MoveComponent
     private Vector3 forward;
     private Vector3 sideways;
 
+    private bool jump;
+    public float jumpForce;
+
+   
 
     public override void EditMoveValues(TransformableData moveData)
     {
         moveSpeed = moveData.moveSpeed;
         smoothValue = moveData.smoothValue;
+        jumpForce = moveData.jumpForce;
     }
 
     public override void CheckInputs()
@@ -32,6 +37,11 @@ public class SimpleObjectMove : MoveComponent
         sideways = cam.transform.right;
         sideways.y = 0;
 
+        if (Input.GetButtonDown("Jump"))
+        {
+            jump = true;
+        }
+
     }
 
     public override void Move()
@@ -42,5 +52,30 @@ public class SimpleObjectMove : MoveComponent
         targetVelocity.y = rb.linearVelocity.y;
 
         rb.linearVelocity = Vector3.SmoothDamp(rb.linearVelocity, targetVelocity, ref refVelocity, smoothValue * Time.fixedDeltaTime);
+
+        Jump();
     }
+
+    private void Jump()
+    {
+        if (jump && CheckGrounded())
+        {
+            Vector3 jumpVector = Vector3.up * jumpForce;
+            rb.AddForce(jumpVector, ForceMode.Impulse);
+            jump = false;
+
+            print("jumped");
+        }
+    }
+
+    private bool CheckGrounded()
+    {
+        LayerMask groundLayer = LayerMask.GetMask("Ground");
+
+        float groundCheckDistance = 0.2f;
+        bool hit = Physics.Raycast(groundCheckTransform.position, Vector3.down, groundCheckDistance, groundLayer);
+
+        return hit;
+    }
+
 }

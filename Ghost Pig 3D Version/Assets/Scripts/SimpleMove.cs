@@ -16,9 +16,7 @@ public class SimpleObjectMove : MoveComponent
     private bool jump;
     public float jumpForce;
 
-   
-
-    public override void EditMoveValues(TransformableData moveData)
+    public override void EditScriptUniqueDataValues(TransformableData moveData)
     {
         moveSpeed = moveData.moveSpeed;
         smoothValue = moveData.smoothValue;
@@ -70,12 +68,10 @@ public class SimpleObjectMove : MoveComponent
 
     private bool CheckGrounded()
     {
-        LayerMask groundLayer = LayerMask.GetMask("Ground");
-
-        float groundCheckDistance = 0.2f;
-        bool hit = Physics.Raycast(groundCheckTransform.position, Vector3.down, groundCheckDistance, groundLayer);
-
-        return hit;
+        //float checkDistance = 0.2f;
+        //bool hit = Physics.BoxCast(player.transform.position + cubeCastOffset, cubeCastHalfVector, Vector3.down, Quaternion.identity, checkDistance);
+        //print(hit);
+        return true;
     }
 
 }

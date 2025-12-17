@@ -12,5 +12,7 @@ public class TransformableData : ScriptableObject
     public GameObject moveComponentObj;
     public bool useGravity = true;
 
-    public Vector3 groundCheckPositionOffset;
+    public Vector3 cubeCastOffset;
+
+    public Vector3 cubeCastHalfVector;
 }

@@ -16,10 +16,9 @@ public class TransformerUtilities : MonoBehaviour
     public Transform playerBodyContainer;
     public GameObject playerBody;
 
-    public Transform groundCheckTransform;
-
     public void TransformToSomething(TransformableData transformData, GameObject obj, Vector3 newPlayerPosition)
     {
+        ClearComponentContainer();
         ClearOldBody();
 
         this.currentTransformData = transformData;
@@ -31,8 +30,6 @@ public class TransformerUtilities : MonoBehaviour
         SetupPosition(newPlayerPosition);
         SetupNewPlayerBody(obj);
         SetupGravity(transformData.useGravity);
-        SetupGroundCheckOffset(transformData.groundCheckPositionOffset);
-
     }
 
     // Have this in a separate class later or atleast rename;
@@ -43,8 +40,7 @@ public class TransformerUtilities : MonoBehaviour
         MoveComponent moveComponent = newMoveComponent.GetComponent<MoveComponent>();
 
         moveComponent = newMoveComponent.GetComponent<MoveComponent>();
-        moveComponent.InitializeValues(rb, cam, groundCheckTransform);
-        moveComponent.EditMoveValues(currentTransformData);
+        moveComponent.InitializeValues(currentTransformData, rb, cam, gameObject);
 
         playerMoveScript.moveComponent = moveComponent;
 
@@ -60,16 +56,15 @@ public class TransformerUtilities : MonoBehaviour
     {
         GameObject newPlayerBody = Instantiate(obj, transform.position, Quaternion.identity, playerBodyContainer);
         playerBody = newPlayerBody;
+
+        Rigidbody rb = newPlayerBody.GetComponent<Rigidbody>();
+        Destroy(rb);
+        ClearGreenClones(newPlayerBody.transform);
     }
 
     private void SetupGravity(bool useGravity)
     {
         rb.useGravity = useGravity;
-    }
-
-    private void SetupGroundCheckOffset(Vector3 offset)
-    {
-        groundCheckTransform.localPosition = offset;
     }
 
     public void DestroyOldObject(GameObject obj)
@@ -85,6 +80,22 @@ public class TransformerUtilities : MonoBehaviour
     public void ClearOldBody()
     {
         foreach (Transform child in playerBodyContainer)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
+    public void ClearComponentContainer()
+    {
+        foreach (Transform child in componentContainer)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
+    public void ClearGreenClones(Transform obj)
+    {
+        foreach (Transform child in obj)
         {
             Destroy(child.gameObject);
         }

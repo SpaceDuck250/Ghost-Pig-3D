@@ -117,5 +117,6 @@ public class GhostCollisionChecker : MonoBehaviour
 
         selectedObject = FindClosestObject(collisionListScript.enteredObjectList);
         OnObjectEnter?.Invoke(selectedObject);
+        print(selectedObject);
     }
 }

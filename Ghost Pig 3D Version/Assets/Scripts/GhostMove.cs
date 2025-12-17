@@ -16,7 +16,7 @@ public class GhostMove : MoveComponent
     private float moveY;
 
 
-    public override void EditMoveValues(TransformableData moveData)
+    public override void EditScriptUniqueDataValues(TransformableData moveData)
     {
         moveSpeed = moveData.moveSpeed;
         smoothValue = moveData.smoothValue;

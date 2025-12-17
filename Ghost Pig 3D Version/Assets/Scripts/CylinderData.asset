@@ -18,4 +18,5 @@ MonoBehaviour:
   jumpForce: 5
   moveComponentObj: {fileID: 4321470994432122185, guid: 66b5c4a8f0f267145b6ee932e14e5fd8, type: 3}
   useGravity: 1
-  groundCheckPositionOffset: {x: 0, y: -0.901, z: 0}
+  cubeCastOffset: {x: 0, y: -0.2, z: 0}
+  cubeCastHalfVector: {x: 1, y: 1.5, z: 1}

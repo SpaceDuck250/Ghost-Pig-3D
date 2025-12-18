@@ -34,11 +34,6 @@ public class GreenCloneCreator : MonoBehaviour
 
         greenClone.AddComponent<GreenCloneScript>();
         greenClone.GetComponent<GreenCloneScript>().parent = gameObject;
-
-        foreach (Transform child in greenClone.transform)
-        {
-            Destroy(child.gameObject);
-        }
     }
 
     private void DestroyAllScript(GameObject obj)

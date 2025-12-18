@@ -3,6 +3,12 @@ using UnityEngine;
 public class GroundCheckerScript : MonoBehaviour
 {
     public bool grounded = false;
+    public static string groundCheckName = "GroundCheckObj";
+
+    private void Start()
+    {
+        gameObject.name = groundCheckName;
+    }
 
     private void OnTriggerEnter(Collider other)
     {

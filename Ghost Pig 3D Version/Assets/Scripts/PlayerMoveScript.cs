@@ -22,5 +22,7 @@ public class PlayerMoveScript : MonoBehaviour
         }
 
         moveComponent.Move();
+
+        moveComponent.Jump();
     }
 }

@@ -16,6 +16,9 @@ public class TransformerUtilities : MonoBehaviour
     public Transform playerBodyContainer;
     public GameObject playerBody;
 
+    [SerializeField]
+    private GroundCheckerScript groundCheckScript;
+
     public void TransformToSomething(TransformableData transformData, GameObject obj, Vector3 newPlayerPosition)
     {
         ClearComponentContainer();
@@ -24,12 +27,12 @@ public class TransformerUtilities : MonoBehaviour
         this.currentTransformData = transformData;
         GameObject moveComponentObj = transformData.moveComponentObj;
 
-        SetupMoveComponent(moveComponentObj);
 
 
         SetupPosition(newPlayerPosition);
         SetupNewPlayerBody(obj);
         SetupGravity(transformData.useGravity);
+        SetupMoveComponent(moveComponentObj);
     }
 
     // Have this in a separate class later or atleast rename;
@@ -40,7 +43,7 @@ public class TransformerUtilities : MonoBehaviour
         MoveComponent moveComponent = newMoveComponent.GetComponent<MoveComponent>();
 
         moveComponent = newMoveComponent.GetComponent<MoveComponent>();
-        moveComponent.InitializeValues(currentTransformData, rb, cam, gameObject);
+        moveComponent.InitializeValues(currentTransformData, rb, cam, gameObject, groundCheckScript);
 
         playerMoveScript.moveComponent = moveComponent;
 
@@ -59,7 +62,9 @@ public class TransformerUtilities : MonoBehaviour
 
         Rigidbody rb = newPlayerBody.GetComponent<Rigidbody>();
         Destroy(rb);
-        ClearGreenClones(newPlayerBody.transform);
+
+        groundCheckScript = FindGroundCheckScript(newPlayerBody);
+
     }
 
     private void SetupGravity(bool useGravity)
@@ -93,11 +98,15 @@ public class TransformerUtilities : MonoBehaviour
         }
     }
 
-    public void ClearGreenClones(Transform obj)
+    private GroundCheckerScript FindGroundCheckScript(GameObject parent)
     {
-        foreach (Transform child in obj)
+        Transform groundCheck = parent.transform.Find(GroundCheckerScript.groundCheckName);
+        if (groundCheck == null)
         {
-            Destroy(child.gameObject);
+            return null;
         }
+
+        GroundCheckerScript groundCheckScript = groundCheck.GetComponent<GroundCheckerScript>();
+        return groundCheckScript; 
     }
 }

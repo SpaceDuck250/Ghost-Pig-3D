@@ -44,19 +44,17 @@ public class SimpleObjectMove : MoveComponent
 
     public override void Move()
     {
-        //Vector3 targetVelocity = new Vector3(moveX, 0, moveZ) * moveSpeed;
         Vector3 targetVelocity = forward * moveZ + sideways * moveX;
         targetVelocity *= moveSpeed;
         targetVelocity.y = rb.linearVelocity.y;
 
         rb.linearVelocity = Vector3.SmoothDamp(rb.linearVelocity, targetVelocity, ref refVelocity, smoothValue * Time.fixedDeltaTime);
-
-        Jump();
     }
 
-    private void Jump()
+    public override void Jump()
     {
-        if (jump && CheckGrounded())
+        bool grounded = groundCheckScript.grounded;
+        if (jump && grounded)
         {
             Vector3 jumpVector = Vector3.up * jumpForce;
             rb.AddForce(jumpVector, ForceMode.Impulse);
@@ -64,14 +62,8 @@ public class SimpleObjectMove : MoveComponent
 
             print("jumped");
         }
-    }
 
-    private bool CheckGrounded()
-    {
-        //float checkDistance = 0.2f;
-        //bool hit = Physics.BoxCast(player.transform.position + cubeCastOffset, cubeCastHalfVector, Vector3.down, Quaternion.identity, checkDistance);
-        //print(hit);
-        return true;
+        jump = false;
     }
 
 }

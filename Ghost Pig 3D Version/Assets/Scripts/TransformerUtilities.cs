@@ -27,8 +27,6 @@ public class TransformerUtilities : MonoBehaviour
         this.currentTransformData = transformData;
         GameObject moveComponentObj = transformData.moveComponentObj;
 
-
-
         SetupPosition(newPlayerPosition);
         SetupNewPlayerBody(obj);
         SetupGravity(transformData.useGravity);
@@ -43,9 +41,12 @@ public class TransformerUtilities : MonoBehaviour
         MoveComponent moveComponent = newMoveComponent.GetComponent<MoveComponent>();
 
         moveComponent = newMoveComponent.GetComponent<MoveComponent>();
-        moveComponent.InitializeValues(currentTransformData, rb, cam, gameObject, groundCheckScript);
+
+        MoveContext moveContext = new MoveContext(rb, cam, gameObject, groundCheckScript);
+        moveComponent.InitializeValues(currentTransformData, moveContext);
 
         playerMoveScript.moveComponent = moveComponent;
+        playerMoveScript.jumpComponent = moveComponent.GetComponent<IJump>();
 
     }
 

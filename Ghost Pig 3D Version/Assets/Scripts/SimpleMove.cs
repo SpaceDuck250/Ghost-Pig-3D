@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SimpleObjectMove : MoveComponent
+public class SimpleObjectMove : MoveComponent, IJump
 {
     private float moveX;
     private float moveZ;
@@ -51,7 +51,7 @@ public class SimpleObjectMove : MoveComponent
         rb.linearVelocity = Vector3.SmoothDamp(rb.linearVelocity, targetVelocity, ref refVelocity, smoothValue * Time.fixedDeltaTime);
     }
 
-    public override void Jump()
+    public  void Jump()
     {
         bool grounded = groundCheckScript.grounded;
         if (jump && grounded)

@@ -45,11 +45,4 @@ public class GhostMove : MoveComponent
 
         rb.linearVelocity = Vector3.SmoothDamp(rb.linearVelocity, targetVelocity, ref refVelocity, smoothValue * Time.fixedDeltaTime);
     }
-
-    public override void Jump()
-    {
-
-    }
-
-   
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerMoveScript : MonoBehaviour
 {
     public MoveComponent moveComponent;
+    public IJump jumpComponent;
 
     private void Update()
     {
@@ -23,6 +24,6 @@ public class PlayerMoveScript : MonoBehaviour
 
         moveComponent.Move();
 
-        moveComponent.Jump();
+        jumpComponent.Jump();
     }
 }

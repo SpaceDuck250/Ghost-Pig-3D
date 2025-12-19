@@ -24,6 +24,9 @@ public class PlayerMoveScript : MonoBehaviour
 
         moveComponent.Move();
 
-        jumpComponent.Jump();
+        if (jumpComponent != null)
+        {
+            jumpComponent.Jump();
+        }
     }
 }

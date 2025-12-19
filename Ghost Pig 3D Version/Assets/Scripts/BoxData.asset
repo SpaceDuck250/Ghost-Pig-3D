@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transformObject: {fileID: 8321178723142918292, guid: 99c8ae991f2048942b978a250bb2b4e1, type: 3}
   moveSpeed: 10
-  smoothValue: 20
-  jumpForce: 5
+  smoothValue: 10
+  jumpForce: 6
   moveComponentObj: {fileID: 4321470994432122185, guid: 66b5c4a8f0f267145b6ee932e14e5fd8, type: 3}
   useGravity: 1
-  groundCheckPositionOffset: {x: 0, y: -0.39, z: 0}
+  cubeCastOffset: {x: 0, y: 0, z: 0}
+  cubeCastHalfVector: {x: 0, y: 0, z: 0}

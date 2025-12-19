@@ -22,7 +22,9 @@ public class GreenCloneCreator : MonoBehaviour
     {
         GameObject greenClone = Instantiate(objectShape, transform.position, transform.localRotation, transform);
 
-        greenClone.transform.localScale *= scaleModifier;
+        //greenClone.transform.localScale *= scaleModifier;
+        greenClone.transform.localScale = new Vector3(1, 1, 1) * scaleModifier;
+
 
         MeshRenderer meshRenderer = greenClone.GetComponent<MeshRenderer>();
         meshRenderer.material = greenTint;

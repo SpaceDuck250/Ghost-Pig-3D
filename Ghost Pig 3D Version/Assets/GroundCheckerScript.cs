@@ -21,4 +21,9 @@ public class GroundCheckerScript : MonoBehaviour
     {
         grounded = false;
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        grounded = true;
+    }
 }

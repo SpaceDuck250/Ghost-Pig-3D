@@ -1,9 +1,12 @@
 using UnityEngine;
+using System;
 
 public class PlayerMoveScript : MonoBehaviour
 {
     public MoveComponent moveComponent;
     public IJump jumpComponent;
+
+    public event System.Action OnJump;
 
     private void Update()
     {
@@ -26,7 +29,10 @@ public class PlayerMoveScript : MonoBehaviour
 
         if (jumpComponent != null)
         {
-            jumpComponent.Jump();
+            if (jumpComponent.Jump())
+            {
+                OnJump?.Invoke();
+            }
         }
     }
 }

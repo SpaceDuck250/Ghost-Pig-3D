@@ -12,18 +12,27 @@ public class GroundCheckerScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
         grounded = true;
         print("hit ground");
-
     }
 
     private void OnTriggerExit(Collider other)
     {
+
         grounded = false;
+        print("not on ground anymore");
     }
 
     private void OnTriggerStay(Collider other)
     {
+        if (other.gameObject.tag == "Zone")
+        {
+            return;
+        }
+
         grounded = true;
     }
+
+    
 }

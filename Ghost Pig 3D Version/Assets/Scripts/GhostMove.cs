@@ -10,10 +10,13 @@ public class GhostMove : MoveComponent
     public float moveSpeed;
     public float smoothValue;
 
+    private float upAndDownSpeedScaler = 0.5f;
+
     private Vector3 forward;
     private Vector3 sideways;
 
     private float moveY;
+
 
 
     public override void EditScriptUniqueDataValues(TransformableData moveData)
@@ -40,7 +43,7 @@ public class GhostMove : MoveComponent
 
     public override void Move()
     {
-        Vector3 targetVelocity = forward * moveZ + sideways * moveX + Vector3.up * moveY;
+        Vector3 targetVelocity = forward * moveZ + sideways * moveX + Vector3.up * moveY * upAndDownSpeedScaler;
         targetVelocity *= moveSpeed;
 
         rb.linearVelocity = Vector3.SmoothDamp(rb.linearVelocity, targetVelocity, ref refVelocity, smoothValue * Time.fixedDeltaTime);

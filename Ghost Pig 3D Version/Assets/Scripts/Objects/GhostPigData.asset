@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb98a758d82500a46b08e1639a12b4d2, type: 3}
   m_Name: GhostPigData
   m_EditorClassIdentifier: 
-  transformObject: {fileID: 5956275691388879294, guid: a9644e1910e94264c9fdf5f058ca0736, type: 3}
-  moveSpeed: 10
+  transformObject: {fileID: 6559960337510469087, guid: 8fc967f384278be4c9440af8eb992080, type: 3}
+  objName: Ghost Pig
+  mass: 0
+  moveSpeed: 6.5
   smoothValue: 5
   jumpForce: 0
   moveComponentObj: {fileID: 8732499116083180173, guid: 6646138d817765448b598c9824397ee1, type: 3}

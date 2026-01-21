@@ -4,6 +4,9 @@ using UnityEngine;
 public class TransformableData : ScriptableObject
 {
     public GameObject transformObject;
+    public string objName;
+
+    public float mass;
 
     public float moveSpeed;
     public float smoothValue;
@@ -12,7 +15,7 @@ public class TransformableData : ScriptableObject
     public GameObject moveComponentObj;
     public bool useGravity = true;
 
-    public Vector3 cubeCastOffset;
+    //public Vector3 cubeCastOffset;
 
-    public Vector3 cubeCastHalfVector;
+    //public Vector3 cubeCastHalfVector;
 }

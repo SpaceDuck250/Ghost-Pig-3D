@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using UnityEngine.XR;
 
 public class TransformerUtilities : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class TransformerUtilities : MonoBehaviour
 
         SetupPosition(newPlayerPosition);
         SetupNewPlayerBody(obj);
-        SetupGravity(transformData.useGravity);
+        SetupGravityAndMass(transformData.useGravity, transformData.mass);
         SetupMoveComponent(moveComponentObj);
     }
 
@@ -68,9 +69,10 @@ public class TransformerUtilities : MonoBehaviour
 
     }
 
-    private void SetupGravity(bool useGravity)
+    private void SetupGravityAndMass(bool useGravity, float newMass)
     {
         rb.useGravity = useGravity;
+        rb.mass = newMass;
     }
 
     public void DestroyOldObject(GameObject obj)

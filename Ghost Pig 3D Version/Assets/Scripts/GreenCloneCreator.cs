@@ -25,9 +25,14 @@ public class GreenCloneCreator : MonoBehaviour
         //greenClone.transform.localScale *= scaleModifier;
         greenClone.transform.localScale = new Vector3(1, 1, 1) * scaleModifier;
 
+        greenClone.transform.localPosition = Vector3.zero;
+
 
         MeshRenderer meshRenderer = greenClone.GetComponent<MeshRenderer>();
         meshRenderer.material = greenTint;
+
+        Collider collider = greenClone.GetComponent<Collider>();
+        collider.isTrigger = true;
 
         Rigidbody rb = greenClone.GetComponent<Rigidbody>();
         Destroy(rb);

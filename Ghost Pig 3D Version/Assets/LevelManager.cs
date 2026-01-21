@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -13,9 +14,28 @@ public class LevelManager : MonoBehaviour
 
     public GameObject player;
 
+    public Vector3 globalGravityScale;
+
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            RestartLevel();
+        }
+    }
+
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Start()
@@ -23,6 +43,8 @@ public class LevelManager : MonoBehaviour
         DoorScript.OnLevelFinish += OnLevelFinish;
 
         SetupLevel();
+
+        Physics.gravity = globalGravityScale;
     }
 
     private void OnDestroy()
@@ -54,6 +76,14 @@ public class LevelManager : MonoBehaviour
         SetupPlayer();
     }
 
+    public void RestartLevel()
+    {
+        float loadTime = 0.5f;
+        Invoke("SetupLevel", loadTime);
+
+        SceneManager.LoadScene("SampleScene");
+    }
+
     private void SetupDoors()
     {
         DoorScript.unlockedDoorCount = 0;
@@ -62,13 +92,15 @@ public class LevelManager : MonoBehaviour
 
     private void SetupPlayer()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+
         TransformerScript transformer = player.GetComponent<TransformerScript>();
         transformer.TransformBackIntoGhostPig();
 
         TeleportPlayerToNextLevel();
     }
 
-    private void TeleportPlayerToNextLevel()
+    public void TeleportPlayerToNextLevel()
     {
         Vector3 spawnPosition = currentLevel.spawnLocation;
 

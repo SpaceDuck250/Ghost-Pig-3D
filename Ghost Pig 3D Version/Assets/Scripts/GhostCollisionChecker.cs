@@ -1,10 +1,11 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using System.Collections;
 
 public class GhostCollisionChecker : MonoBehaviour
 {
-    public event Action<TransformableData, GameObject> OnTransformInto;
+    public static event Action<TransformableData, GameObject> OnTransformInto;
     public static Action<GameObject> OnObjectEnter;
 
     public GhostCollisionListScript collisionListScript;
@@ -13,6 +14,8 @@ public class GhostCollisionChecker : MonoBehaviour
     private GameObject selectedObject;
 
     private bool ghostCollisionDisabled = false;
+
+    public BoxCollider selectCollider;
 
     private void Start()
     {
@@ -62,6 +65,8 @@ public class GhostCollisionChecker : MonoBehaviour
     {
         ghostCollisionDisabled = false;
         selectedObject = null;
+
+        //StartCoroutine(ResetCollider());
     }
 
     private void TransformInto(GameObject obj)
@@ -119,4 +124,15 @@ public class GhostCollisionChecker : MonoBehaviour
         OnObjectEnter?.Invoke(selectedObject);
         print(selectedObject);
     }
+
+    //private IEnumerator ResetCollider()
+    //{
+    //    float waitTime = 0.2f;
+
+    //    selectCollider.enabled = false;
+
+    //    yield return new WaitForSeconds(waitTime);
+
+    //    selectCollider.enabled = true;
+    //}
 }

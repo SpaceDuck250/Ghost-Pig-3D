@@ -11,16 +11,18 @@ public class TransformerScript : MonoBehaviour
 
     private bool alreadyGhostPig;
 
+    public Camera cam;
+
     private void Start()
     {
         TransformBackIntoGhostPig();
 
-        transformer.collisionChecker.OnTransformInto += OnTransformIntoObject;
+        GhostCollisionChecker.OnTransformInto += OnTransformIntoObject;
     }
 
     private void OnDestroy()
     {
-        transformer.collisionChecker.OnTransformInto -= OnTransformIntoObject;
+        GhostCollisionChecker.OnTransformInto -= OnTransformIntoObject;
     }
 
     private void Update()
@@ -56,6 +58,7 @@ public class TransformerScript : MonoBehaviour
             Quaternion objectRotation = transformer.playerBody == null ? Quaternion.identity : transformer.playerBody.transform.rotation;
 
             transformer.CreateOldObject(currentObj, objectRotation);
+
 
         }
 

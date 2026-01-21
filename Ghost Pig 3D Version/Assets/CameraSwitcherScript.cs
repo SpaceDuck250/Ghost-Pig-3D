@@ -4,7 +4,7 @@ public class CameraSwitcherScript : MonoBehaviour
 {
     public Transform player;
 
-    private bool toggle = false;
+    public bool inFirstPersonMode = false;
 
     public TurnScript turnScript;
     public Transform thirdPersonRotatePoint;
@@ -29,10 +29,10 @@ public class CameraSwitcherScript : MonoBehaviour
     private void SwitchToFirstPerson()
     {
         turnScript.rotatePoint = firstPersonRotatePoint;
-        transform.position = player.position; // wrong clown
+        transform.position = player.position;
     }
 
-    private void SwitchToThirdPerson()
+    public void SwitchToThirdPerson()
     {
         turnScript.rotatePoint = thirdPersonRotatePoint;
         transform.localRotation = Quaternion.Euler(0, 0, 0);
@@ -41,7 +41,7 @@ public class CameraSwitcherScript : MonoBehaviour
 
     private void ToggleCameraModes()
     {
-        if (!toggle)
+        if (!inFirstPersonMode)
         {
             SwitchToFirstPerson();
         }
@@ -50,6 +50,6 @@ public class CameraSwitcherScript : MonoBehaviour
             SwitchToThirdPerson();
         }
 
-        toggle = !toggle;
+        inFirstPersonMode = !inFirstPersonMode;
     }
 }

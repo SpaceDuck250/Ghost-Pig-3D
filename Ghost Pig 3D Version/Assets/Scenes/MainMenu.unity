@@ -2527,6 +2527,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   songList:
   - {fileID: 8300000, guid: 6d795c7d25b38f2488ddbd4033e30a65, type: 3}
+  - {fileID: 8300000, guid: 7ca272a1579652d42aab39160dc0bae5, type: 3}
   soundManager: {fileID: 1063385819}
 --- !u!114 &1063385822
 MonoBehaviour:

@@ -4,7 +4,7 @@ public class GreenCloneCreator : MonoBehaviour
 {
     private GameObject objectShape;
 
-    private static float scaleModifier = 1.03f;
+    private static float scaleModifier = 1.04f;
 
     public static Material greenTint;
 

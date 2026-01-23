@@ -16,7 +16,7 @@ public class ButtonListenerScript : MonoBehaviour
         ButtonScript.OnButtonReleased -= OnButtonReleased;
     }
 
-    private void OnButtonReleased(GameObject connectedPiston)
+    private void OnButtonReleased(GameObject connectedPiston, GameObject button)
     {
         if (!CheckIfThisIsTheAssociatedPiston(connectedPiston))
         {
@@ -26,7 +26,7 @@ public class ButtonListenerScript : MonoBehaviour
         pistonScript.buttonPressed = false;
     }
 
-    private void OnButtonPressed(GameObject connectedPiston)
+    private void OnButtonPressed(GameObject connectedPiston, GameObject button)
     {
         if (!CheckIfThisIsTheAssociatedPiston(connectedPiston))
         {

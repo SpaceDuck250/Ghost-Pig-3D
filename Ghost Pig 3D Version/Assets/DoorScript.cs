@@ -14,6 +14,7 @@ public class DoorScript : MonoBehaviour
         unlockedDoorCount++;
         if (unlockedDoorCount == totalDoorsInLevel)
         {
+            print("finishedLevel");
             OnLevelFinish?.Invoke();
         }
 

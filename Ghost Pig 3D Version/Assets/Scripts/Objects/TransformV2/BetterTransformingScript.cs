@@ -29,7 +29,7 @@ public class BetterTransformingScript : MonoBehaviour
         transformUtilities.TransformIntoSomething(transformObject);
     }
 
-    private void TransformBackIntoGhostPig()
+    public void TransformBackIntoGhostPig()
     {
         if (transformUtilities.alreadyGhostPig)
         {
@@ -37,6 +37,7 @@ public class BetterTransformingScript : MonoBehaviour
         }
 
         GameObject ghostPigBody = transformUtilities.ghostBody;
+
         transformUtilities.TransformIntoSomething(ghostPigBody);
 
         TransformerScript.OnTransformBackIntoGhostPig?.Invoke();

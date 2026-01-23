@@ -5,7 +5,7 @@ public class BetterTransformUtilities : MonoBehaviour
     public Rigidbody rb;
     public GameObject ghostBody;
 
-    public GameObject objectBody;
+    public GameObject usedObjectBody; 
 
     public bool alreadyGhostPig;
 
@@ -25,7 +25,7 @@ public class BetterTransformUtilities : MonoBehaviour
     {
         SwitchBetweenObjectAndGhostPig();
 
-        objectBody = transformObject;
+        usedObjectBody = transformObject;
 
         Vector3 objectPosition = transformObject.transform.position;
         SetupCamera(objectPosition, transformObject.transform);
@@ -44,7 +44,7 @@ public class BetterTransformUtilities : MonoBehaviour
     {
         transform.position = objectPosition;
         transform.parent = objectTransform;
-        camAdjuster.player = objectBody.transform;
+        camAdjuster.player = usedObjectBody.transform;
     }
 
     private void SetupMovement(GameObject transformObject, Rigidbody newRb)
@@ -64,7 +64,7 @@ public class BetterTransformUtilities : MonoBehaviour
         GameObject newMoveComponentObj = Instantiate(moveComponentObject, container);
 
         GroundCheckerScript groundCheck = FindGroundCheckScript(transformObject);
-        MoveContext moveContext = new MoveContext(rb, cam, objectBody, groundCheck);
+        MoveContext moveContext = new MoveContext(rb, cam, usedObjectBody, groundCheck);
 
         MoveComponent moveComponent = newMoveComponentObj.GetComponent<MoveComponent>();
         moveComponent.InitializeValues(transformData, moveContext);
@@ -99,16 +99,22 @@ public class BetterTransformUtilities : MonoBehaviour
         if (alreadyGhostPig)
         {
             ShowGhostBody(false);
+            //if (objectBody != null)
+            //{
+            //    Vector3 oldObjectPosition = objectBody.transform.position;
+            //    TeleportGhostPigToObjectLocation(oldObjectPosition);
+            //}
         }
         else
         {
-            ShowGhostBody(true);
 
-            if (objectBody != null)
-            {
-                Vector3 oldObjectPosition = objectBody.transform.position;
-                TeleportGhostPigToObjectLocation(oldObjectPosition);
-            }
+            //if (usedObjectBody != null) // obj body should be the obj
+            //{
+            //    //Vector3 oldObjectPosition = usedObjectBody.transform.position;
+            //    //TeleportGhostPigToObjectLocation(oldObjectPosition);
+            //}
+
+            ShowGhostBody(true);
         }
 
         alreadyGhostPig = !alreadyGhostPig;

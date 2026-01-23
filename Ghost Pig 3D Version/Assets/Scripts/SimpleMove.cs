@@ -58,7 +58,7 @@ public class SimpleObjectMove : MoveComponent, IJump
         }
         else
         {
-            OnObjectStopMove.Invoke();
+            OnObjectStopMove?.Invoke();
         }
     }
 
@@ -155,6 +155,11 @@ public class SimpleObjectMove : MoveComponent, IJump
 
     private bool CheckIfMoving()
     {
+        if (alreadyIgnoring)
+        {
+            return false;
+        }
+
         Vector3 groundVelocity = rb.linearVelocity;
         groundVelocity.y = 0;
 

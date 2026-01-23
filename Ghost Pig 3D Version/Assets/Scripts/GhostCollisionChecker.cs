@@ -66,7 +66,7 @@ public class GhostCollisionChecker : MonoBehaviour
         ghostCollisionDisabled = false;
         selectedObject = null;
 
-        //StartCoroutine(ResetCollider());
+        StartCoroutine(ResetCollider());
     }
 
     private void TransformInto(GameObject obj)
@@ -125,14 +125,14 @@ public class GhostCollisionChecker : MonoBehaviour
         print(selectedObject);
     }
 
-    //private IEnumerator ResetCollider()
-    //{
-    //    float waitTime = 0.2f;
+    private IEnumerator ResetCollider()
+    {
+        float waitTime = 0.2f;
 
-    //    selectCollider.enabled = false;
+        selectCollider.enabled = false;
 
-    //    yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(waitTime);
 
-    //    selectCollider.enabled = true;
-    //}
+        selectCollider.enabled = true;
+    }
 }

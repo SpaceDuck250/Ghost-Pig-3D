@@ -14,6 +14,9 @@ public class LevelManager : MonoBehaviour
 
     public GameObject player;
 
+    public BetterTransformingScript transformingScript;
+    public BetterTransformUtilities transformUtilities;
+
     public Vector3 globalGravityScale;
 
 
@@ -43,6 +46,7 @@ public class LevelManager : MonoBehaviour
         DoorScript.OnLevelFinish += OnLevelFinish;
 
         SetupLevel();
+        RestartLevel();
 
         Physics.gravity = globalGravityScale;
     }
@@ -92,18 +96,40 @@ public class LevelManager : MonoBehaviour
 
     private void SetupPlayer()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        // UNCOMMENT TO REVERT TO OLD SYSTEM
 
-        TransformerScript transformer = player.GetComponent<TransformerScript>();
-        transformer.TransformBackIntoGhostPig();
+        //player = GameObject.FindGameObjectWithTag("Player");
+
+        //TransformerScript transformer = player.GetComponent<TransformerScript>();
+        //transformer.TransformBackIntoGhostPig();
+        SetupTransformReferencesWhenRestart();
+
+        transformingScript.TransformBackIntoGhostPig();
 
         TeleportPlayerToNextLevel();
     }
 
     public void TeleportPlayerToNextLevel()
     {
+        print("teleported the player");
+
         Vector3 spawnPosition = currentLevel.spawnLocation;
 
-        player.transform.position = spawnPosition;
+        print(currentLevel);
+
+        GameObject body = transformUtilities.ghostBody;
+
+        body.transform.position = spawnPosition;
+    }
+
+    private void SetupTransformReferencesWhenRestart()
+    {
+        if (transformUtilities == null || transformingScript == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+
+            transformingScript = player.GetComponent<BetterTransformingScript>();
+            transformUtilities = player.GetComponent<BetterTransformUtilities>();
+        }
     }
 }

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GreenCloneScript : MonoBehaviour
@@ -7,7 +8,7 @@ public class GreenCloneScript : MonoBehaviour
     void Start()
     {
         GhostCollisionChecker.OnObjectEnter += OnObjectEnter;
-        //TransformerScript.OnTransformBackIntoGhostPig += OnTransformBackIntoGhostPig;
+        TransformerScript.OnTransformBackIntoGhostPig += OnTransformBackIntoGhostPig;
         transform.localPosition = Vector3.zero;
         gameObject.SetActive(false);
 
@@ -17,23 +18,31 @@ public class GreenCloneScript : MonoBehaviour
     private void OnDestroy()
     {
         GhostCollisionChecker.OnObjectEnter -= OnObjectEnter;
+        TransformerScript.OnTransformBackIntoGhostPig -= OnTransformBackIntoGhostPig;
+
     }
 
-    //public void OnTransformBackIntoGhostPig()
-    //{
-    //    ShowGreenTint(false);
-    //}
+    public void OnTransformBackIntoGhostPig()
+    {
+        //if (this == null)
+        //{
+        //    return;
+        //}
 
-    private void OnObjectEnter(GameObject obj)
+        ShowGreenTint(false);
+    }
+
+    private void OnObjectEnter(GameObject objectEntered)
     {
 
-        if (obj == parent)
+        if (objectEntered == parent || CheckIfWeAreGreenChild(objectEntered))
         {
             ShowGreenTint(true);
         }
         else
         {
             ShowGreenTint(false);
+
         }
 
     }
@@ -43,16 +52,30 @@ public class GreenCloneScript : MonoBehaviour
         gameObject.SetActive(shown);
     }
 
-    //private void DestroyChildren()
-    //{
-    //    if (transform.childCount == 0)
-    //    {
-    //        return;
-    //    }
+    private bool CheckIfWeAreGreenChild(GameObject enteredObj)
+    {
+        if (enteredObj == null)
+        {
+            return false;
+        }
 
-    //    foreach (Transform child in transform)
-    //    {
-    //        Destroy(child.gameObject);
-    //    }
-    //}
+        Transform enteredTransform = enteredObj.transform;
+
+        if (enteredTransform.childCount == 0)
+        {
+            return false;
+        }
+
+        foreach (Transform child in enteredTransform)
+        {
+            if (transform.parent == child)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
 }

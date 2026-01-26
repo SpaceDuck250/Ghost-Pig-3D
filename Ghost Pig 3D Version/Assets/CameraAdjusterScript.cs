@@ -22,7 +22,7 @@ public class CameraAdjusterScript : MonoBehaviour
 
         TryHittingSurface(out surfacePoint);
         cam.transform.position = surfacePoint;
-        print("Adjusted");
+        //print("Adjusted");
 
     }
 

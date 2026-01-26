@@ -2544,6 +2544,7 @@ MonoBehaviour:
   jumpSFX: {fileID: 8300000, guid: f2dab034f1335fa42a1e7499a7252aab, type: 3}
   transformSFX: {fileID: 8300000, guid: a5a5f129a321ce74eade61a9d49effaf, type: 3}
   footstepSFX: {fileID: 8300000, guid: 7f30e5315907f7f41abc4e9d360591a8, type: 3}
+  buttonClickSFX: {fileID: 8300000, guid: f4135f5ed006c064ea6e991a2153155e, type: 3}
 --- !u!1 &1102735100
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,6 +23,8 @@ public class SFXPlayerScript : MonoBehaviour
 
         SimpleObjectMove.OnObjectMove += OnObjectMove;
         SimpleObjectMove.OnObjectStopMove += OnObjectStopMove;
+
+        ButtonScript.OnButtonFirstTimeClicked += OnButtonClicked;
     }
 
     private void OnDestroy()
@@ -63,6 +65,12 @@ public class SFXPlayerScript : MonoBehaviour
     private void OnObjectMove()
     {
         soundManager.PlayFootsteps(true);
+    }
+
+    private void OnButtonClicked()
+    {
+        AudioClip buttonPressSFX = sfxStorage.buttonClickSFX;
+        soundManager.PlayEffect(buttonPressSFX, false);
     }
 
 }

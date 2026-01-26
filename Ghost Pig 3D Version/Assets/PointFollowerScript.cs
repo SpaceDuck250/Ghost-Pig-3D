@@ -46,9 +46,12 @@ public class PointFollowerScript : MonoBehaviour
 
     private bool CheckIfPointHasBeenReached()
     {
-        float distance = Vector3.Distance(transform.position, pathPoints[currentPointIndex].position);
+        Vector3 pointPosition = pathPoints[currentPointIndex].position;
+        pointPosition.y = transform.position.y;
 
-        float closeEnough = 0.7f;
+        float distance = Vector3.Distance(transform.position, pointPosition);
+
+        float closeEnough = 0.4f;
         if (distance < closeEnough)
         {
             return true;

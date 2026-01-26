@@ -46,7 +46,7 @@ public class LevelManager : MonoBehaviour
         DoorScript.OnLevelFinish += OnLevelFinish;
 
         SetupLevel();
-        RestartLevel();
+        //RestartLevel();
 
         Physics.gravity = globalGravityScale;
     }

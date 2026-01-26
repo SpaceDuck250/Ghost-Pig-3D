@@ -19,6 +19,8 @@ public class LevelManager : MonoBehaviour
 
     public Vector3 globalGravityScale;
 
+    public static event Action<float> OnRestart;
+
 
     private void Update()
     {
@@ -46,7 +48,9 @@ public class LevelManager : MonoBehaviour
         DoorScript.OnLevelFinish += OnLevelFinish;
 
         SetupLevel();
-        //RestartLevel();
+        RestartLevel();
+
+
 
         Physics.gravity = globalGravityScale;
     }
@@ -78,12 +82,15 @@ public class LevelManager : MonoBehaviour
     {
         SetupDoors();
         SetupPlayer();
+
     }
 
     public void RestartLevel()
     {
+
         float loadTime = 0.5f;
         Invoke("SetupLevel", loadTime);
+
 
         SceneManager.LoadScene("SampleScene");
     }

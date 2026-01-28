@@ -10,7 +10,7 @@ public class LevelManager : MonoBehaviour
     public List<LevelData> levelList = new List<LevelData>();
 
     public LevelData currentLevel;
-    private int currentLevelIndex = 0;
+    public int currentLevelIndex = 0;
 
     public GameObject player;
 
@@ -20,7 +20,6 @@ public class LevelManager : MonoBehaviour
     public Vector3 globalGravityScale;
 
     public static event Action<float> OnRestart;
-
 
     private void Update()
     {
@@ -45,9 +44,12 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        DoorScript.OnLevelFinish += OnLevelFinish;
+        currentLevelIndex = currentLevel.levelIndex;
 
-        SetupLevel();
+        DoorScript.OnLevelFinish += OnLevelFinish;
+        SceneManager.activeSceneChanged += OnSceneChanged;
+
+        //SetupLevel();
         RestartLevel();
 
 
@@ -58,6 +60,8 @@ public class LevelManager : MonoBehaviour
     private void OnDestroy()
     {
         DoorScript.OnLevelFinish -= OnLevelFinish;
+        SceneManager.activeSceneChanged -= OnSceneChanged;
+
     }
 
     private void OnLevelFinish()
@@ -78,7 +82,7 @@ public class LevelManager : MonoBehaviour
         currentLevel = levelList[currentLevelIndex];
     }
 
-    private void SetupLevel()
+    public void SetupLevel()
     {
         SetupDoors();
         SetupPlayer();
@@ -138,5 +142,15 @@ public class LevelManager : MonoBehaviour
             transformingScript = player.GetComponent<BetterTransformingScript>();
             transformUtilities = player.GetComponent<BetterTransformUtilities>();
         }
+    }
+
+    private void OnSceneChanged(Scene oldScene, Scene newScene)
+    {
+        if (newScene.name != "SampleScene" || oldScene == newScene)
+        {
+            return;
+        }
+
+        SetupLevel();
     }
 }

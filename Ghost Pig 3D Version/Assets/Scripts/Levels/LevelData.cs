@@ -5,4 +5,5 @@ public class LevelData : ScriptableObject
 {
     public int doorCount;
     public Vector3 spawnLocation;
+    public int levelIndex;
 }

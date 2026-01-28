@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorCount: 1
   spawnLocation: {x: -23.83, y: 2.001, z: 369.528}
+  levelIndex: 6

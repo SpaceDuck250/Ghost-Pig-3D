@@ -28,6 +28,7 @@ public class SuspicionBarScript : MonoBehaviour
     private void OnLevelFinish()
     {
         ChangeSuspicionBarFillAmount(healthScript.maxHealth);
+        print(healthScript.maxHealth + "kjjsjsjs");
 
     }
 

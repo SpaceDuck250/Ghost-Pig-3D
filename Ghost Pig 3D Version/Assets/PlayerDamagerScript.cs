@@ -16,6 +16,7 @@ public class PlayerDamagerScript : MonoBehaviour
     {
         SightZoneScript.OnSightEnter += OnSightEnter;
         SightZoneScript.OnSightExit += OnSightExit;
+        DoorScript.OnLevelFinish += OnLevelFinish;
     }
 
     private void OnDestroy()
@@ -32,17 +33,18 @@ public class PlayerDamagerScript : MonoBehaviour
 
     private void OnSightExit()
     {
-        print("Exited sight");
-        DamagePlayer = false;
+        ActivateDamageEffect(false);
     }
 
     private void OnSightEnter(float damageAmount, float repeatTime)
     {
-        damage = damageAmount;
-        time = repeatTime;
+        ActivateDamageEffect(true, damageAmount, repeatTime);
+    }
 
-        print("Entered sight");
-        DamagePlayer = true;
+    public void OnLevelFinish()
+    {
+        float maxHealth = healthScript.maxHealth;
+        ResetPlayerHealth(maxHealth);
     }
 
     private void DamagePlayerAccordingToTimer()
@@ -59,5 +61,26 @@ public class PlayerDamagerScript : MonoBehaviour
 
             healthScript.TakeDamage(damage);
         }
+    }
+
+    private void ActivateDamageEffect(bool value, float damageAmount = -1, float repeatTime = -1)
+    {
+        if (!value)
+        {
+            print("Exited sight");
+            DamagePlayer = false;
+            return;
+        }
+
+        damage = damageAmount;
+        time = repeatTime;
+
+        print("Entered sight");
+        DamagePlayer = true;
+    }
+
+    private void ResetPlayerHealth(float maxHealth)
+    {
+        healthScript.health = maxHealth;
     }
 }

@@ -2528,8 +2528,8 @@ MonoBehaviour:
   songList:
   - {fileID: 8300000, guid: 6d795c7d25b38f2488ddbd4033e30a65, type: 3}
   - {fileID: 8300000, guid: 7ca272a1579652d42aab39160dc0bae5, type: 3}
-  - {fileID: 8300000, guid: 0a13c20abaccf12438c78c06666bb3ff, type: 3}
   - {fileID: 8300000, guid: 0afc2536b9b41e6438c9979b076cac3a, type: 3}
+  - {fileID: 8300000, guid: f45aa5cb4a78e834ab429f3b1c3ad00a, type: 3}
   soundManager: {fileID: 1063385819}
 --- !u!114 &1063385822
 MonoBehaviour:
@@ -2547,6 +2547,7 @@ MonoBehaviour:
   transformSFX: {fileID: 8300000, guid: a5a5f129a321ce74eade61a9d49effaf, type: 3}
   footstepSFX: {fileID: 8300000, guid: 7f30e5315907f7f41abc4e9d360591a8, type: 3}
   buttonClickSFX: {fileID: 8300000, guid: f4135f5ed006c064ea6e991a2153155e, type: 3}
+  doorUnlockSFX: {fileID: 8300000, guid: ef557f0302ce86e47bf9e972e6b0ca40, type: 3}
 --- !u!1 &1102735100
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e98671a4be037fa409edf94375bdb037, type: 3}
-  m_Name: PlayArea
+  m_Name: Level10
   m_EditorClassIdentifier: 
   doorCount: 2
-  spawnLocation: {x: -5.3899994, y: 1.14, z: 17.970001}
-  levelIndex: 0
+  spawnLocation: {x: -24.896, y: 1.01, z: 622.6}
+  levelIndex: 9

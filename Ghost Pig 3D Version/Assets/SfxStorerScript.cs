@@ -3,5 +3,5 @@ using UnityEngine.Audio;
 
 public class SfxStorerScript : MonoBehaviour
 {
-    public AudioClip jumpSFX, transformSFX, footstepSFX, buttonClickSFX;
+    public AudioClip jumpSFX, transformSFX, footstepSFX, buttonClickSFX, doorUnlockSFX;
 }

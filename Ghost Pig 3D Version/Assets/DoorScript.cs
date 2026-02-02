@@ -9,9 +9,14 @@ public class DoorScript : MonoBehaviour
     public static System.Action OnDoorUnlock;
     public static System.Action OnLevelFinish;
 
+    public event System.Action OnSelfUnlocked;
+
     public void IncrementDoorCount()
     {
         unlockedDoorCount++;
+
+        OnSelfUnlocked?.Invoke();
+        OnDoorUnlock?.Invoke();
         if (unlockedDoorCount == totalDoorsInLevel)
         {
             print("finishedLevel");

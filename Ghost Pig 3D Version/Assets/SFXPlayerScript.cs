@@ -25,6 +25,8 @@ public class SFXPlayerScript : MonoBehaviour
         SimpleObjectMove.OnObjectStopMove += OnObjectStopMove;
 
         ButtonScript.OnButtonFirstTimeClicked += OnButtonClicked;
+
+        DoorScript.OnDoorUnlock += OnDoorUnlock;
     }
 
     private void OnDestroy()
@@ -35,6 +37,8 @@ public class SFXPlayerScript : MonoBehaviour
 
         SimpleObjectMove.OnObjectMove -= OnObjectMove;
         SimpleObjectMove.OnObjectStopMove -= OnObjectStopMove;
+        DoorScript.OnDoorUnlock -= OnDoorUnlock;
+
 
     }
 
@@ -71,6 +75,13 @@ public class SFXPlayerScript : MonoBehaviour
     {
         AudioClip buttonPressSFX = sfxStorage.buttonClickSFX;
         soundManager.PlayEffect(buttonPressSFX, false);
+    }
+
+    public void OnDoorUnlock()
+    {
+        print("Play door sfx");
+        AudioClip doorUnlock = sfxStorage.doorUnlockSFX;
+        soundManager.PlayEffect(doorUnlock, false);
     }
 
 }

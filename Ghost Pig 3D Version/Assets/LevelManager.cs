@@ -44,6 +44,7 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
+
         currentLevelIndex = currentLevel.levelIndex;
 
         DoorScript.OnLevelFinish += OnLevelFinish;
@@ -75,6 +76,7 @@ public class LevelManager : MonoBehaviour
         int maxLevelIndex = levelList.Count - 1;
         if (currentLevelIndex >= maxLevelIndex)
         {
+            EndScreenScript.OnGameFinish?.Invoke();
             return;
         }
 

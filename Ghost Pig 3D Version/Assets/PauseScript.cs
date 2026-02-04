@@ -7,6 +7,11 @@ public class PauseScript : MonoBehaviour
     private bool paused = false;
     public GameObject pausePanel;
 
+    private void Start()
+    {
+        Cursor.visible = false;
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -17,6 +22,9 @@ public class PauseScript : MonoBehaviour
 
     public void Pause()
     {
+        UISoundsScript.OnUIClick?.Invoke();
+
+
         if (paused)
         {
             pausePanel.SetActive(false);
@@ -37,7 +45,18 @@ public class PauseScript : MonoBehaviour
 
     public void GoToMainMenu()
     {
+        UISoundsScript.OnUIClick?.Invoke();
+
         Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void QuitGame()
+    {
+        UISoundsScript.OnUIClick?.Invoke();
+
+
+        print("Left the game");
+        Application.Quit();
     }
 }

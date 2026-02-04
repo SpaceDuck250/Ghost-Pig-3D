@@ -10,6 +10,8 @@ public class SettingsScript : MonoBehaviour
 
     public void OpenCloseSettings()
     {
+        UISoundsScript.OnUIClick?.Invoke();
+
         if (settingsOpened)
         {
             settingsPanel.SetActive(false);
@@ -42,6 +44,8 @@ public class SettingsScript : MonoBehaviour
 
     public void OnFullScreenToggle(bool toggledOn)
     {
+        UISoundsScript.OnUIClick?.Invoke();
+
         Screen.fullScreen = toggledOn;
 
         int toggledIndex = toggledOn ? 1 : 0;

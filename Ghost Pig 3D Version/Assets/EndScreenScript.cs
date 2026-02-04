@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndScreenScript : MonoBehaviour
 {
@@ -24,6 +25,14 @@ public class EndScreenScript : MonoBehaviour
     {
         endScreen.SetActive(true);
 
-        print("DOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOG");
+        Cursor.visible = true;
+
+        float waitTime = 0.4f;
+        Invoke("GoBackToMainMenu", waitTime);
+    }
+
+    private void GoBackToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }

@@ -76,7 +76,11 @@ public class LevelManager : MonoBehaviour
         int maxLevelIndex = levelList.Count - 1;
         if (currentLevelIndex >= maxLevelIndex)
         {
+            currentLevelIndex = 0;
+            currentLevel = levelList[currentLevelIndex];
+
             EndScreenScript.OnGameFinish?.Invoke();
+
             return;
         }
 

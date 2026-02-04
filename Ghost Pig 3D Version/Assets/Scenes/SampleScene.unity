@@ -14551,6 +14551,7 @@ GameObject:
   - component: {fileID: 853746845}
   - component: {fileID: 853746847}
   - component: {fileID: 853746848}
+  - component: {fileID: 853746849}
   m_Layer: 0
   m_Name: MusicPlayer
   m_TagString: Untagged
@@ -14597,6 +14598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51c1bfd881421764bb59bfc26ae661ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundManager: {fileID: 0}
   playerMove: {fileID: 1716263158}
 --- !u!114 &853746848
 MonoBehaviour:
@@ -14610,6 +14612,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9caf1b85d026dc34ea147e5a2649ddc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &853746849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 853746844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6693ec59bf7325b428277a431bf9fb77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startTime: 3
+  repeatTime: 12
+  sfxPlayer: {fileID: 853746847}
 --- !u!1001 &862946445
 PrefabInstance:
   m_ObjectHideFlags: 0

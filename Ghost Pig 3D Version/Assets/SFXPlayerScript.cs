@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SFXPlayerScript : MonoBehaviour
 {
-    private SoundManagerScript soundManager;
+    public SoundManagerScript soundManager;
     private SfxStorerScript sfxStorage;
     public PlayerMoveScript playerMove;
 

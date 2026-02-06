@@ -15,6 +15,11 @@ public class RandomPigSoundsScript : MonoBehaviour
 
     private void TryPlayingPigSounds()
     {
+        if (sfxPlayer.soundManager == null)
+        {
+            return; 
+        }
+
         int randomValue = Random.Range(0, 2);
 
         if (randomValue == 0)
